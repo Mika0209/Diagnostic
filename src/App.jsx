@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import debounce from 'lodash.debounce';
+import Character from './Components/Character';
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -46,31 +47,14 @@ function App() {
         type="text"
         placeholder="Buscar"
         onChange={(e) => handleSearchChange(e.target.value)} // Manejador del evento onChange
-        style={{
-          padding: '10px',
-          width: '300px',
-          margin: '20px auto',
-          display: 'block',
-          border: '1px solid #ccc',
-          borderRadius: '4px'
-        }}
+        className='search'
       />
       <div className="character-list">
         {filteredCharacters.length > 0 ? (
           filteredCharacters.map(character => (
-            <div key={character._id} className="character-card">
-              <div className="image-container">
-                <h2 style={{ fontWeight: 'bold', color: 'black', top: '10px', left: '10px'}}>
-                  {character.name}
-                </h2>
-                {character.imageUrl && (
-                  <a href={character.sourceUrl} target="_blank">
-                    <img src={character.imageUrl} alt={character.name} />
-                  </a>
-                )}
-              </div>
-            </div>
-          ))
+            <Character key={character._id}
+            character={character}/>
+                      ))
         ) : (
           <p>No se encontraron personajes.</p>
         )}
